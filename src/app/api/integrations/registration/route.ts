@@ -1,0 +1,3 @@
+import{NextRequest,NextResponse}from"next/server";import{safeEqual}from"@/lib/security";import{findRegistrations}from"@/lib/lookup";
+function authorized(req:NextRequest){const expected=process.env.INTEGRATION_API_KEY||"";const supplied=req.headers.get("x-api-key")||"";return expected.length>=24&&safeEqual(expected,supplied)}
+export async function GET(req:NextRequest){if(!authorized(req))return NextResponse.json({error:"Unauthorized"},{status:401});const q=req.nextUrl.searchParams.get("q")||"";const rows=await findRegistrations(q);return NextResponse.json(rows.map(r=>({registrationNumber:r.registrationNumber,name:r.person.fullName,area:r.person.area,checkedIn:Boolean(r.attendance),transportRequired:r.transportRequired})))}

@@ -1,0 +1,640 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationSource {
+  WHATSAPP
+  FACEBOOK
+  INSTAGRAM
+  TIKTOK
+  CHURCH
+  FRIEND
+  RADIO
+  SMS
+  OTHER
+  STAFF
+  API
+  SELF_WEB
+  STAFF_CAPTURE
+  IMPORT
+  EVENT_DAY
+}
+
+enum OrganizationType {
+  MINISTRY
+  ZONE
+  GROUP
+  CHURCH
+  CELL
+  OTHER
+}
+
+enum OrganizationAccess {
+  OWN
+  SUBTREE
+}
+
+enum ContactType {
+  PHONE
+  WHATSAPP
+  EMAIL
+  OTHER
+}
+
+enum RelationshipType {
+  SELF
+  MOTHER
+  FATHER
+  SPOUSE
+  BROTHER
+  SISTER
+  GUARDIAN
+  FRIEND
+  CHURCH_WORKER
+  OTHER
+}
+
+enum DuplicateReviewStatus {
+  PENDING
+  DISTINCT
+  MERGED
+  DISMISSED
+}
+
+enum JourneyStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SCHEDULED
+  COMPLETED
+  PAUSED
+}
+
+enum InvitationChannel {
+  WEB
+  WHATSAPP
+  SMS
+  STAFF
+  EVENT_DAY
+  OTHER
+}
+
+enum InvitationStatus {
+  CREATED
+  QUEUED
+  SENT
+  DELIVERED
+  OPENED
+  REGISTERED
+  DECLINED
+  OPTED_OUT
+  FAILED
+}
+
+enum CheckInMethod {
+  QR
+  MANUAL
+  API
+}
+
+enum BoardingDirection {
+  OUTBOUND
+  RETURN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum AgeGroup {
+  CHILD
+  TEEN
+  YOUNG_ADULT
+  ADULT
+  SENIOR
+  UNKNOWN
+}
+
+enum FollowUpStatus {
+  NEW
+  ASSIGNED
+  CONTACTED
+  NO_ANSWER
+  FOLLOW_UP_REQUIRED
+  FOUNDATION_SCHOOL
+  CELL_ASSIGNED
+  CHURCH_ATTENDING
+  ESTABLISHED
+}
+
+enum InteractionChannel {
+  PHONE
+  WHATSAPP
+  SMS
+  VISIT
+  CHURCH
+  OTHER
+}
+
+enum IntegrationStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id                 String                @id @default(uuid()) @db.Uuid
+  email              String                @unique
+  name               String
+  passwordHash       String
+  active             Boolean               @default(true)
+  lastLoginAt        DateTime?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  deletedAt          DateTime?
+  roles              UserRole[]
+  checkIns           Attendance[]          @relation("CheckedInBy")
+  boardings          TransportBoarding[]
+  decisions          SalvationDecision[]
+  followUps          FollowUpAssignment[]  @relation("AssignedWorker")
+  interactions       FollowUpInteraction[]
+  auditLogs          AuditLog[]
+  registrations      EventRegistration[]   @relation("RegisteredBy")
+  organizationAccess UserOrganization[]
+  journeyEntries     PersonJourney[]       @relation("JourneyWorker")
+  invitationsCreated EventInvitation[]     @relation("InvitationCreatedBy")
+}
+
+model Role {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String           @unique
+  description String?
+  system      Boolean          @default(false)
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String           @id @default(uuid()) @db.Uuid
+  key         String           @unique
+  description String?
+  roles       RolePermission[]
+}
+
+model UserRole {
+  userId String @db.Uuid
+  roleId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       String     @db.Uuid
+  permissionId String     @db.Uuid
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model Event {
+  id                   String                 @id @default(uuid()) @db.Uuid
+  name                 String
+  code                 String                 @unique
+  registrationPrefix   String                 @unique
+  registrationSequence Int                    @default(0)
+  date                 DateTime               @db.Date
+  startTime            String?
+  venue                String?
+  address              String?
+  description          String?
+  registrationOpen     Boolean                @default(false)
+  transportEnabled     Boolean                @default(false)
+  soulCaptureEnabled   Boolean                @default(false)
+  status               EventStatus            @default(DRAFT)
+  attendanceTarget     Int?
+  soulTarget           Int?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  deletedAt            DateTime?
+  organizationId       String?                @db.Uuid
+  organization         Organization?          @relation(fields: [organizationId], references: [id])
+  registrations        EventRegistration[]
+  routes               TransportRoute[]
+  pickupPoints         TransportPickupPoint[]
+  vehicles             TransportVehicle[]
+  attendance           Attendance[]
+  decisions            SalvationDecision[]
+  followUps            FollowUpAssignment[]
+  invitations          EventInvitation[]
+  journeyEntries       PersonJourney[]
+
+  @@index([date, status])
+}
+
+model Person {
+  id                 String               @id @default(uuid()) @db.Uuid
+  fullName           String
+  phone              String?
+  normalizedPhone    String?
+  area               String?
+  gender             Gender?
+  ageGroup           AgeGroup             @default(UNKNOWN)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  deletedAt          DateTime?
+  registrations      EventRegistration[]
+  decisions          SalvationDecision[]
+  followUps          FollowUpAssignment[]
+  contacts           PersonContact[]
+  organizations      PersonOrganization[]
+  journeyEntries     PersonJourney[]
+  invitationsSent    EventInvitation[]    @relation("InvitationInviter")
+  invitationSources  EventInvitation[]    @relation("InvitationRegistrant")
+  duplicateSource    PossibleDuplicate[]  @relation("DuplicateSource")
+  duplicateCandidate PossibleDuplicate[]  @relation("DuplicateCandidate")
+
+  @@index([normalizedPhone])
+  @@index([fullName])
+  @@index([area])
+}
+
+model EventRegistration {
+  id                      String               @id @default(uuid()) @db.Uuid
+  eventId                 String               @db.Uuid
+  personId                String               @db.Uuid
+  registrationNumber      String               @unique
+  qrTokenHash             String               @unique
+  source                  RegistrationSource
+  sourceDetail            String?
+  guestCount              Int                  @default(0)
+  partySize               Int                  @default(1)
+  firstTimer              Boolean              @default(false)
+  transportRequired       Boolean              @default(false)
+  returnTransportRequired Boolean              @default(false)
+  consentUpdates          Boolean              @default(false)
+  registeredById          String?              @db.Uuid
+  registeredAt            DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+  deletedAt               DateTime?
+  event                   Event                @relation(fields: [eventId], references: [id])
+  person                  Person               @relation(fields: [personId], references: [id])
+  registeredBy            User?                @relation("RegisteredBy", fields: [registeredById], references: [id])
+  attendance              Attendance?
+  transportAssignment     TransportAssignment?
+  boardings               TransportBoarding[]
+  salvationDecision       SalvationDecision?
+  followUps               FollowUpAssignment[]
+  invitation              EventInvitation?
+
+  @@unique([eventId, personId])
+  @@index([eventId, registeredAt])
+  @@index([eventId, firstTimer])
+  @@index([eventId, transportRequired])
+}
+
+model Attendance {
+  id             String            @id @default(uuid()) @db.Uuid
+  eventId        String            @db.Uuid
+  registrationId String            @unique @db.Uuid
+  checkedInAt    DateTime          @default(now())
+  checkedInById  String?           @db.Uuid
+  method         CheckInMethod
+  reversedAt     DateTime?
+  reversalReason String?
+  deviceId       String?
+  event          Event             @relation(fields: [eventId], references: [id])
+  registration   EventRegistration @relation(fields: [registrationId], references: [id])
+  checkedInBy    User?             @relation("CheckedInBy", fields: [checkedInById], references: [id])
+
+  @@index([eventId, checkedInAt])
+}
+
+model TransportRoute {
+  id          String                 @id @default(uuid()) @db.Uuid
+  eventId     String                 @db.Uuid
+  code        String
+  name        String
+  capacity    Int?
+  active      Boolean                @default(true)
+  event       Event                  @relation(fields: [eventId], references: [id])
+  pickups     TransportPickupPoint[]
+  vehicles    TransportVehicle[]
+  assignments TransportAssignment[]
+
+  @@unique([eventId, code])
+}
+
+model TransportPickupPoint {
+  id            String                @id @default(uuid()) @db.Uuid
+  eventId       String                @db.Uuid
+  routeId       String?               @db.Uuid
+  name          String
+  address       String?
+  departureTime String?
+  event         Event                 @relation(fields: [eventId], references: [id])
+  route         TransportRoute?       @relation(fields: [routeId], references: [id])
+  assignments   TransportAssignment[]
+
+  @@unique([eventId, name])
+}
+
+model TransportVehicle {
+  id          String                @id @default(uuid()) @db.Uuid
+  eventId     String                @db.Uuid
+  routeId     String?               @db.Uuid
+  code        String
+  name        String?
+  capacity    Int
+  active      Boolean               @default(true)
+  event       Event                 @relation(fields: [eventId], references: [id])
+  route       TransportRoute?       @relation(fields: [routeId], references: [id])
+  assignments TransportAssignment[]
+
+  @@unique([eventId, code])
+}
+
+model TransportAssignment {
+  id               String                @id @default(uuid()) @db.Uuid
+  registrationId   String                @unique @db.Uuid
+  routeId          String?               @db.Uuid
+  pickupPointId    String?               @db.Uuid
+  vehicleId        String?               @db.Uuid
+  seatsRequired    Int                   @default(1)
+  capacityOverride Boolean               @default(false)
+  createdAt        DateTime              @default(now())
+  registration     EventRegistration     @relation(fields: [registrationId], references: [id])
+  route            TransportRoute?       @relation(fields: [routeId], references: [id])
+  pickupPoint      TransportPickupPoint? @relation(fields: [pickupPointId], references: [id])
+  vehicle          TransportVehicle?     @relation(fields: [vehicleId], references: [id])
+
+  @@index([vehicleId])
+}
+
+model TransportBoarding {
+  id             String            @id @default(uuid()) @db.Uuid
+  registrationId String            @db.Uuid
+  direction      BoardingDirection
+  boardedAt      DateTime          @default(now())
+  boardedById    String?           @db.Uuid
+  method         CheckInMethod
+  registration   EventRegistration @relation(fields: [registrationId], references: [id])
+  boardedBy      User?             @relation(fields: [boardedById], references: [id])
+
+  @@unique([registrationId, direction])
+}
+
+model SalvationDecision {
+  id             String              @id @default(uuid()) @db.Uuid
+  eventId        String              @db.Uuid
+  personId       String              @db.Uuid
+  registrationId String?             @unique @db.Uuid
+  decidedAt      DateTime            @default(now())
+  workerId       String?             @db.Uuid
+  notes          String?
+  event          Event               @relation(fields: [eventId], references: [id])
+  person         Person              @relation(fields: [personId], references: [id])
+  registration   EventRegistration?  @relation(fields: [registrationId], references: [id])
+  worker         User?               @relation(fields: [workerId], references: [id])
+  followUp       FollowUpAssignment?
+
+  @@unique([eventId, personId])
+}
+
+model FollowUpAssignment {
+  id                  String                @id @default(uuid()) @db.Uuid
+  eventId             String                @db.Uuid
+  personId            String                @db.Uuid
+  registrationId      String?               @db.Uuid
+  salvationDecisionId String?               @unique @db.Uuid
+  assignedWorkerId    String?               @db.Uuid
+  status              FollowUpStatus        @default(NEW)
+  lastContactAt       DateTime?
+  nextFollowUpAt      DateTime?
+  outcome             String?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  event               Event                 @relation(fields: [eventId], references: [id])
+  person              Person                @relation(fields: [personId], references: [id])
+  registration        EventRegistration?    @relation(fields: [registrationId], references: [id])
+  salvationDecision   SalvationDecision?    @relation(fields: [salvationDecisionId], references: [id])
+  assignedWorker      User?                 @relation("AssignedWorker", fields: [assignedWorkerId], references: [id])
+  interactions        FollowUpInteraction[]
+
+  @@index([assignedWorkerId, status])
+  @@index([nextFollowUpAt])
+}
+
+model FollowUpInteraction {
+  id           String             @id @default(uuid()) @db.Uuid
+  assignmentId String             @db.Uuid
+  workerId     String             @db.Uuid
+  channel      InteractionChannel
+  notes        String
+  outcome      String?
+  contactedAt  DateTime           @default(now())
+  assignment   FollowUpAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  worker       User               @relation(fields: [workerId], references: [id])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String?  @db.Uuid
+  action     String
+  entityType String
+  entityId   String?
+  before     Json?
+  after      Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+  user       User?    @relation(fields: [userId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+model Organization {
+  id             String               @id @default(uuid()) @db.Uuid
+  parentId       String?              @db.Uuid
+  type           OrganizationType
+  name           String
+  code           String               @unique
+  active         Boolean              @default(true)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  parent         Organization?        @relation("OrganizationTree", fields: [parentId], references: [id])
+  children       Organization[]       @relation("OrganizationTree")
+  users          UserOrganization[]
+  people         PersonOrganization[]
+  events         Event[]
+  journeyStages  JourneyStage[]
+  journeyEntries PersonJourney[]
+  invitations    EventInvitation[]
+
+  @@index([parentId, type])
+}
+
+model UserOrganization {
+  userId         String             @db.Uuid
+  organizationId String             @db.Uuid
+  access         OrganizationAccess @default(OWN)
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@id([userId, organizationId])
+}
+
+model PersonOrganization {
+  id             String       @id @default(uuid()) @db.Uuid
+  personId       String       @db.Uuid
+  organizationId String       @db.Uuid
+  roleLabel      String?
+  isPrimary      Boolean      @default(false)
+  startedAt      DateTime     @default(now())
+  endedAt        DateTime?
+  person         Person       @relation(fields: [personId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@index([personId, isPrimary])
+  @@index([organizationId, endedAt])
+}
+
+model PersonContact {
+  id              String           @id @default(uuid()) @db.Uuid
+  personId        String           @db.Uuid
+  type            ContactType      @default(PHONE)
+  value           String
+  normalizedValue String?
+  contactPerson   String?
+  relationship    RelationshipType @default(SELF)
+  isPrimary       Boolean          @default(false)
+  consentUpdates  Boolean          @default(false)
+  optedOutAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  person          Person           @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@index([normalizedValue])
+  @@index([personId, isPrimary])
+}
+
+model PossibleDuplicate {
+  id           String                @id @default(uuid()) @db.Uuid
+  personId     String                @db.Uuid
+  candidateId  String                @db.Uuid
+  reason       String
+  score        Int?
+  status       DuplicateReviewStatus @default(PENDING)
+  reviewedById String?               @db.Uuid
+  reviewedAt   DateTime?
+  createdAt    DateTime              @default(now())
+  person       Person                @relation("DuplicateSource", fields: [personId], references: [id], onDelete: Cascade)
+  candidate    Person                @relation("DuplicateCandidate", fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, candidateId])
+  @@index([status, createdAt])
+}
+
+model JourneyStage {
+  id             String          @id @default(uuid()) @db.Uuid
+  organizationId String?         @db.Uuid
+  key            String
+  name           String
+  position       Int
+  enabled        Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  organization   Organization?   @relation(fields: [organizationId], references: [id])
+  entries        PersonJourney[]
+
+  @@unique([organizationId, key])
+  @@index([organizationId, position])
+}
+
+model PersonJourney {
+  id             String        @id @default(uuid()) @db.Uuid
+  personId       String        @db.Uuid
+  organizationId String?       @db.Uuid
+  stageId        String        @db.Uuid
+  eventId        String?       @db.Uuid
+  status         JourneyStatus
+  effectiveDate  DateTime      @default(now())
+  workerId       String?       @db.Uuid
+  location       String?
+  notes          String?
+  metadata       Json?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  person         Person        @relation(fields: [personId], references: [id])
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  stage          JourneyStage  @relation(fields: [stageId], references: [id])
+  event          Event?        @relation(fields: [eventId], references: [id])
+  worker         User?         @relation("JourneyWorker", fields: [workerId], references: [id])
+
+  @@index([personId, stageId, effectiveDate])
+  @@index([organizationId, stageId, status])
+}
+
+model EventInvitation {
+  id                 String             @id @default(uuid()) @db.Uuid
+  eventId            String             @db.Uuid
+  organizationId     String?            @db.Uuid
+  inviterPersonId    String             @db.Uuid
+  inviteeName        String
+  inviteePhone       String?
+  normalizedPhone    String?
+  tokenHash          String             @unique
+  channel            InvitationChannel  @default(WEB)
+  status             InvitationStatus   @default(CREATED)
+  registrationId     String?            @unique @db.Uuid
+  registeredPersonId String?            @db.Uuid
+  createdById        String?            @db.Uuid
+  sentAt             DateTime?
+  openedAt           DateTime?
+  respondedAt        DateTime?
+  optedOutAt         DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  event              Event              @relation(fields: [eventId], references: [id])
+  organization       Organization?      @relation(fields: [organizationId], references: [id])
+  inviter            Person             @relation("InvitationInviter", fields: [inviterPersonId], references: [id])
+  registrant         Person?            @relation("InvitationRegistrant", fields: [registeredPersonId], references: [id])
+  registration       EventRegistration? @relation(fields: [registrationId], references: [id])
+  createdBy          User?              @relation("InvitationCreatedBy", fields: [createdById], references: [id])
+
+  @@index([eventId, status])
+  @@index([normalizedPhone])
+}
+
+model IntegrationEvent {
+  id          String            @id @default(uuid()) @db.Uuid
+  provider    String
+  eventType   String
+  externalId  String?
+  payload     Json
+  status      IntegrationStatus @default(PENDING)
+  attempts    Int               @default(0)
+  lastError   String?
+  createdAt   DateTime          @default(now())
+  processedAt DateTime?
+
+  @@index([provider, status, createdAt])
+}

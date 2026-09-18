@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3000:3000"
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: event_soul_portal
+      POSTGRES_USER: portal_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - portal_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U portal_user -d event_soul_portal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  portal_postgres_data:

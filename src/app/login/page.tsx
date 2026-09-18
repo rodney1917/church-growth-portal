@@ -1,0 +1,2 @@
+import{LoginForm}from"@/components/login-form";
+export default function LoginPage(){return <main className="public-shell"><div className="public-wrap"><div className="public-head"><div className="brand"><span className="brand-mark">E+</span> Event & Soul Winning</div><h1>Welcome back</h1><p>Sign in to manage today&apos;s ministry work.</p></div><section className="panel"><LoginForm/></section></div></main>}

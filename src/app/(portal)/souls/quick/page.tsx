@@ -1,0 +1,2 @@
+import{QuickSoulForm}from"@/components/quick-soul-form";import{requireSession}from"@/lib/auth";import{db}from"@/lib/db";
+export default async function QuickSoul(){await requireSession("souls.capture");const event=await db.event.findFirstOrThrow({where:{soulCaptureEnabled:true,deletedAt:null},orderBy:{date:"desc"}});return <><p className="eyebrow">Rapid entry</p><h1 className="page-title">Quick capture soul</h1><div className="panel" style={{maxWidth:650,marginTop:18}}><QuickSoulForm eventId={event.id}/></div></>}
