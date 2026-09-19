@@ -10,7 +10,7 @@
       "id":"b2267fa0-cc00-47a1-8de7-222222222222","name":"Accept direct text only","type":"n8n-nodes-base.code","typeVersion":2,"position":[440,300]
     },
     {
-      "parameters": {"method":"POST","url":"={{ $env.PORTAL_BASE_URL + '/api/integrations/whatsapp' }}","sendHeaders":true,"headerParameters":{"parameters":[{"name":"x-api-key","value":"={{ $env.PORTAL_INTEGRATION_API_KEY }}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json) }}","options":{"timeout":20000}},
+      "parameters": {"method":"POST","url":"https://notc.startrackzm.com/api/integrations/whatsapp","authentication":"genericCredentialType","genericAuthType":"httpHeaderAuth","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json) }}","options":{"timeout":20000}},
       "id":"b2267fa0-cc00-47a1-8de7-333333333333","name":"Ask portal for next step","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[660,300]
     },
     {
@@ -18,7 +18,7 @@
       "id":"b2267fa0-cc00-47a1-8de7-444444444444","name":"Reply needed?","type":"n8n-nodes-base.if","typeVersion":2.2,"position":[880,300]
     },
     {
-      "parameters": {"method":"POST","url":"={{ $env.WAHA_BASE_URL + '/api/sendText' }}","sendHeaders":true,"headerParameters":{"parameters":[{"name":"X-Api-Key","value":"={{ $env.WAHA_API_KEY }}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify({session:$('Accept direct text only').first().json.session,chatId:$('Accept direct text only').first().json.chatId,text:$json.reply}) }}","options":{"timeout":20000}},
+      "parameters": {"method":"POST","url":"https://media.startrackzm.com/api/sendText","authentication":"genericCredentialType","genericAuthType":"httpHeaderAuth","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify({session:$('Accept direct text only').first().json.session,chatId:$('Accept direct text only').first().json.chatId,text:$json.reply}) }}","options":{"timeout":20000}},
       "id":"b2267fa0-cc00-47a1-8de7-555555555555","name":"Send WhatsApp reply","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1100,200]
     }
   ],
