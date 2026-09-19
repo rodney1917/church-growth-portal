@@ -246,6 +246,7 @@ model Event {
   followUps            FollowUpAssignment[]
   invitations          EventInvitation[]
   journeyEntries       PersonJourney[]
+  whatsAppConversations WhatsAppRegistrationConversation[]
 
   @@index([date, status])
 }
@@ -650,4 +651,23 @@ model IntegrationRegistration {
 
   @@unique([provider, externalId])
   @@index([registrationId])
+}
+
+model WhatsAppRegistrationConversation {
+  id             String   @id @default(uuid()) @db.Uuid
+  session        String
+  chatId         String
+  eventId        String   @db.Uuid
+  step           String   @default("NAME")
+  fullName       String?
+  area           String?
+  guestCount     Int      @default(0)
+  transport      Boolean  @default(false)
+  lastMessageId  String?
+  registrationId String?  @db.Uuid
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  event          Event    @relation(fields: [eventId], references: [id])
+
+  @@unique([session, chatId])
 }

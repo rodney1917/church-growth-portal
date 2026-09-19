@@ -31,6 +31,7 @@ QR codes contain random tokens only. Passwords use bcrypt, sessions are signed H
 
 - `GET /api/integrations/registration?q=...` searches registration status.
 - `POST /api/integrations/registration` creates a confirmed registration from n8n/WAHA/SMS with `x-api-key`. Requires `provider`, unique `externalId`, `eventCode`, `confirmed: true`, `fullName`, and `source` (`WHATSAPP`, `SMS`, or `OTHER`). `phone`, `area`, and `consentUpdates` are optional. Returns `registrationNumber` and `personId`; repeated provider/externalId returns the same number. A name alone is never registered. The optional phone is not a unique person identifier.
+- `POST /api/integrations/whatsapp` advances a self-registration conversation. n8n sends `session`, `chatId`, `messageId`, `text`, and optional `eventCode`; the portal returns a `reply` to send through WAHA. It ignores repeated message IDs, registers only after the person's final YES, and stores conversation state in PostgreSQL.
 - `POST /api/integrations/sms` accepts authenticated inbound `NIGHT`, `YES`, and `NO` commands for asynchronous processing.
 - `PATCH /api/integrations/invitations/{token}` records queued, sent, delivered, or failed delivery state.
 - `GET /api/reports/export?eventId=...&type=...` exports authorized CSV reports.
@@ -44,6 +45,12 @@ Import `n8n/confirmed-registration.json` into n8n. Configure the webhook's **Hea
 Send JSON to the n8n webhook after the invitee explicitly confirms, for example `{"externalId":"provider-message-id","eventCode":"NOT1000","confirmed":true,"fullName":"Jane Banda","phone":"0971234567","area":"Kafue","source":"WHATSAPP","consentUpdates":false}`. Use a stable provider message/conversation ID for retries. For future events, send that event's own code. n8n returns the human-readable registration number; use it in a separate authorized WAHA/SMS confirmation step. Do not set `confirmed: true` merely because another person supplied an invitee's name. Opt-outs and unsolicited names must not use this endpoint. The workflow is deliberately inactive on import.
 
 Migration `0003_integration_registration` adds a small idempotency table and must be applied with `pnpm prisma migrate deploy` before activating the workflow. It does not change existing registrations.
+
+### WhatsApp self-registration
+
+Use `n8n/whatsapp-self-registration.json`, **not** `confirmed-registration.json`, as the WAHA incoming-message workflow. Import it inactive. The WAHA Incoming Message webhook is set to respond immediately, so it does not need a Respond to Webhook node. Configure its Header Auth credential with a newly generated private key (rotate any key shared in chat). Set n8n environment variables `PORTAL_BASE_URL=https://notc.startrackzm.com`, `PORTAL_INTEGRATION_API_KEY`, `WAHA_BASE_URL`, and `WAHA_API_KEY`. If `$env` access is restricted, use n8n credentials on the two HTTP Request nodes instead. Connect WAHA's `message` event to the webhook's production URL only after testing; leave existing WAHA/n8n services otherwise unchanged.
+
+Conversation: HI -> name -> area -> guest count -> transport (if enabled) -> YES/NO confirmation -> registration number. For multiple open events, the portal asks for `REGISTER <event code>`. The workflow ignores outgoing, group and media messages. Only confirmed self-registrations are stored as registrations; conversation drafts remain separate. No unrelated marketing consent is inferred. Migration `0004_whatsapp_registration_conversation` adds the conversation table. Apply migrations before deploying/activating this workflow. Test with a controlled WhatsApp number and confirm the dashboard registration total changes only after YES.
 
 ## Required environment
 

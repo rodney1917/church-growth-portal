@@ -354,6 +354,7 @@ export type EventWhereInput = {
   followUps?: Prisma.FollowUpAssignmentListRelationFilter
   invitations?: Prisma.EventInvitationListRelationFilter
   journeyEntries?: Prisma.PersonJourneyListRelationFilter
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -387,6 +388,7 @@ export type EventOrderByWithRelationInput = {
   followUps?: Prisma.FollowUpAssignmentOrderByRelationAggregateInput
   invitations?: Prisma.EventInvitationOrderByRelationAggregateInput
   journeyEntries?: Prisma.PersonJourneyOrderByRelationAggregateInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -423,6 +425,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   followUps?: Prisma.FollowUpAssignmentListRelationFilter
   invitations?: Prisma.EventInvitationListRelationFilter
   journeyEntries?: Prisma.PersonJourneyListRelationFilter
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationListRelationFilter
 }, "id" | "code" | "registrationPrefix">
 
 export type EventOrderByWithAggregationInput = {
@@ -509,6 +512,7 @@ export type EventCreateInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -541,6 +545,7 @@ export type EventUncheckedCreateInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -573,6 +578,7 @@ export type EventUpdateInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -605,6 +611,7 @@ export type EventUncheckedUpdateInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -966,6 +973,20 @@ export type EventUpdateOneRequiredWithoutInvitationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutInvitationsInput, Prisma.EventUpdateWithoutInvitationsInput>, Prisma.EventUncheckedUpdateWithoutInvitationsInput>
 }
 
+export type EventCreateNestedOneWithoutWhatsAppConversationsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedCreateWithoutWhatsAppConversationsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutWhatsAppConversationsInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutWhatsAppConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedCreateWithoutWhatsAppConversationsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutWhatsAppConversationsInput
+  upsert?: Prisma.EventUpsertWithoutWhatsAppConversationsInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutWhatsAppConversationsInput, Prisma.EventUpdateWithoutWhatsAppConversationsInput>, Prisma.EventUncheckedUpdateWithoutWhatsAppConversationsInput>
+}
+
 export type EventCreateWithoutRegistrationsInput = {
   id?: string
   name: string
@@ -995,6 +1016,7 @@ export type EventCreateWithoutRegistrationsInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutRegistrationsInput = {
@@ -1026,6 +1048,7 @@ export type EventUncheckedCreateWithoutRegistrationsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutRegistrationsInput = {
@@ -1073,6 +1096,7 @@ export type EventUpdateWithoutRegistrationsInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutRegistrationsInput = {
@@ -1104,6 +1128,7 @@ export type EventUncheckedUpdateWithoutRegistrationsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutAttendanceInput = {
@@ -1135,6 +1160,7 @@ export type EventCreateWithoutAttendanceInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutAttendanceInput = {
@@ -1166,6 +1192,7 @@ export type EventUncheckedCreateWithoutAttendanceInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutAttendanceInput = {
@@ -1213,6 +1240,7 @@ export type EventUpdateWithoutAttendanceInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutAttendanceInput = {
@@ -1244,6 +1272,7 @@ export type EventUncheckedUpdateWithoutAttendanceInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutRoutesInput = {
@@ -1275,6 +1304,7 @@ export type EventCreateWithoutRoutesInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutRoutesInput = {
@@ -1306,6 +1336,7 @@ export type EventUncheckedCreateWithoutRoutesInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutRoutesInput = {
@@ -1353,6 +1384,7 @@ export type EventUpdateWithoutRoutesInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutRoutesInput = {
@@ -1384,6 +1416,7 @@ export type EventUncheckedUpdateWithoutRoutesInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutPickupPointsInput = {
@@ -1415,6 +1448,7 @@ export type EventCreateWithoutPickupPointsInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutPickupPointsInput = {
@@ -1446,6 +1480,7 @@ export type EventUncheckedCreateWithoutPickupPointsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutPickupPointsInput = {
@@ -1493,6 +1528,7 @@ export type EventUpdateWithoutPickupPointsInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutPickupPointsInput = {
@@ -1524,6 +1560,7 @@ export type EventUncheckedUpdateWithoutPickupPointsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutVehiclesInput = {
@@ -1555,6 +1592,7 @@ export type EventCreateWithoutVehiclesInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutVehiclesInput = {
@@ -1586,6 +1624,7 @@ export type EventUncheckedCreateWithoutVehiclesInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutVehiclesInput = {
@@ -1633,6 +1672,7 @@ export type EventUpdateWithoutVehiclesInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutVehiclesInput = {
@@ -1664,6 +1704,7 @@ export type EventUncheckedUpdateWithoutVehiclesInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutDecisionsInput = {
@@ -1695,6 +1736,7 @@ export type EventCreateWithoutDecisionsInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutDecisionsInput = {
@@ -1726,6 +1768,7 @@ export type EventUncheckedCreateWithoutDecisionsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutDecisionsInput = {
@@ -1773,6 +1816,7 @@ export type EventUpdateWithoutDecisionsInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutDecisionsInput = {
@@ -1804,6 +1848,7 @@ export type EventUncheckedUpdateWithoutDecisionsInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutFollowUpsInput = {
@@ -1835,6 +1880,7 @@ export type EventCreateWithoutFollowUpsInput = {
   decisions?: Prisma.SalvationDecisionCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutFollowUpsInput = {
@@ -1866,6 +1912,7 @@ export type EventUncheckedCreateWithoutFollowUpsInput = {
   decisions?: Prisma.SalvationDecisionUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutFollowUpsInput = {
@@ -1913,6 +1960,7 @@ export type EventUpdateWithoutFollowUpsInput = {
   decisions?: Prisma.SalvationDecisionUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutFollowUpsInput = {
@@ -1944,6 +1992,7 @@ export type EventUncheckedUpdateWithoutFollowUpsInput = {
   decisions?: Prisma.SalvationDecisionUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutOrganizationInput = {
@@ -1975,6 +2024,7 @@ export type EventCreateWithoutOrganizationInput = {
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutOrganizationInput = {
@@ -2006,6 +2056,7 @@ export type EventUncheckedCreateWithoutOrganizationInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutOrganizationInput = {
@@ -2089,6 +2140,7 @@ export type EventCreateWithoutJourneyEntriesInput = {
   decisions?: Prisma.SalvationDecisionCreateNestedManyWithoutEventInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutJourneyEntriesInput = {
@@ -2120,6 +2172,7 @@ export type EventUncheckedCreateWithoutJourneyEntriesInput = {
   decisions?: Prisma.SalvationDecisionUncheckedCreateNestedManyWithoutEventInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutJourneyEntriesInput = {
@@ -2167,6 +2220,7 @@ export type EventUpdateWithoutJourneyEntriesInput = {
   decisions?: Prisma.SalvationDecisionUpdateManyWithoutEventNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutJourneyEntriesInput = {
@@ -2198,6 +2252,7 @@ export type EventUncheckedUpdateWithoutJourneyEntriesInput = {
   decisions?: Prisma.SalvationDecisionUncheckedUpdateManyWithoutEventNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutInvitationsInput = {
@@ -2229,6 +2284,7 @@ export type EventCreateWithoutInvitationsInput = {
   decisions?: Prisma.SalvationDecisionCreateNestedManyWithoutEventInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutInvitationsInput = {
@@ -2260,6 +2316,7 @@ export type EventUncheckedCreateWithoutInvitationsInput = {
   decisions?: Prisma.SalvationDecisionUncheckedCreateNestedManyWithoutEventInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
   journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutInvitationsInput = {
@@ -2307,6 +2364,7 @@ export type EventUpdateWithoutInvitationsInput = {
   decisions?: Prisma.SalvationDecisionUpdateManyWithoutEventNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutInvitationsInput = {
@@ -2337,6 +2395,151 @@ export type EventUncheckedUpdateWithoutInvitationsInput = {
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEventNestedInput
   decisions?: Prisma.SalvationDecisionUncheckedUpdateManyWithoutEventNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
+  journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutWhatsAppConversationsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationPrefix: string
+  registrationSequence?: number
+  date: Date | string
+  startTime?: string | null
+  venue?: string | null
+  address?: string | null
+  description?: string | null
+  registrationOpen?: boolean
+  transportEnabled?: boolean
+  soulCaptureEnabled?: boolean
+  status?: $Enums.EventStatus
+  attendanceTarget?: number | null
+  soulTarget?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization?: Prisma.OrganizationCreateNestedOneWithoutEventsInput
+  registrations?: Prisma.EventRegistrationCreateNestedManyWithoutEventInput
+  routes?: Prisma.TransportRouteCreateNestedManyWithoutEventInput
+  pickupPoints?: Prisma.TransportPickupPointCreateNestedManyWithoutEventInput
+  vehicles?: Prisma.TransportVehicleCreateNestedManyWithoutEventInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutEventInput
+  decisions?: Prisma.SalvationDecisionCreateNestedManyWithoutEventInput
+  followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutEventInput
+  invitations?: Prisma.EventInvitationCreateNestedManyWithoutEventInput
+  journeyEntries?: Prisma.PersonJourneyCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutWhatsAppConversationsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationPrefix: string
+  registrationSequence?: number
+  date: Date | string
+  startTime?: string | null
+  venue?: string | null
+  address?: string | null
+  description?: string | null
+  registrationOpen?: boolean
+  transportEnabled?: boolean
+  soulCaptureEnabled?: boolean
+  status?: $Enums.EventStatus
+  attendanceTarget?: number | null
+  soulTarget?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organizationId?: string | null
+  registrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutEventInput
+  routes?: Prisma.TransportRouteUncheckedCreateNestedManyWithoutEventInput
+  pickupPoints?: Prisma.TransportPickupPointUncheckedCreateNestedManyWithoutEventInput
+  vehicles?: Prisma.TransportVehicleUncheckedCreateNestedManyWithoutEventInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEventInput
+  decisions?: Prisma.SalvationDecisionUncheckedCreateNestedManyWithoutEventInput
+  followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutEventInput
+  invitations?: Prisma.EventInvitationUncheckedCreateNestedManyWithoutEventInput
+  journeyEntries?: Prisma.PersonJourneyUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutWhatsAppConversationsInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedCreateWithoutWhatsAppConversationsInput>
+}
+
+export type EventUpsertWithoutWhatsAppConversationsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedUpdateWithoutWhatsAppConversationsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedCreateWithoutWhatsAppConversationsInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutWhatsAppConversationsInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutWhatsAppConversationsInput, Prisma.EventUncheckedUpdateWithoutWhatsAppConversationsInput>
+}
+
+export type EventUpdateWithoutWhatsAppConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationPrefix?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  transportEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soulCaptureEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  attendanceTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  soulTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneWithoutEventsNestedInput
+  registrations?: Prisma.EventRegistrationUpdateManyWithoutEventNestedInput
+  routes?: Prisma.TransportRouteUpdateManyWithoutEventNestedInput
+  pickupPoints?: Prisma.TransportPickupPointUpdateManyWithoutEventNestedInput
+  vehicles?: Prisma.TransportVehicleUpdateManyWithoutEventNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutEventNestedInput
+  decisions?: Prisma.SalvationDecisionUpdateManyWithoutEventNestedInput
+  followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
+  invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
+  journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutWhatsAppConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationPrefix?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  venue?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  transportEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soulCaptureEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+  attendanceTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  soulTarget?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organizationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutEventNestedInput
+  routes?: Prisma.TransportRouteUncheckedUpdateManyWithoutEventNestedInput
+  pickupPoints?: Prisma.TransportPickupPointUncheckedUpdateManyWithoutEventNestedInput
+  vehicles?: Prisma.TransportVehicleUncheckedUpdateManyWithoutEventNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEventNestedInput
+  decisions?: Prisma.SalvationDecisionUncheckedUpdateManyWithoutEventNestedInput
+  followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
+  invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
 }
 
@@ -2391,6 +2594,7 @@ export type EventUpdateWithoutOrganizationInput = {
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutOrganizationInput = {
@@ -2422,6 +2626,7 @@ export type EventUncheckedUpdateWithoutOrganizationInput = {
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutEventNestedInput
   invitations?: Prisma.EventInvitationUncheckedUpdateManyWithoutEventNestedInput
   journeyEntries?: Prisma.PersonJourneyUncheckedUpdateManyWithoutEventNestedInput
+  whatsAppConversations?: Prisma.WhatsAppRegistrationConversationUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2461,6 +2666,7 @@ export type EventCountOutputType = {
   followUps: number
   invitations: number
   journeyEntries: number
+  whatsAppConversations: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2473,6 +2679,7 @@ export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   followUps?: boolean | EventCountOutputTypeCountFollowUpsArgs
   invitations?: boolean | EventCountOutputTypeCountInvitationsArgs
   journeyEntries?: boolean | EventCountOutputTypeCountJourneyEntriesArgs
+  whatsAppConversations?: boolean | EventCountOutputTypeCountWhatsAppConversationsArgs
 }
 
 /**
@@ -2548,6 +2755,13 @@ export type EventCountOutputTypeCountJourneyEntriesArgs<ExtArgs extends runtime.
   where?: Prisma.PersonJourneyWhereInput
 }
 
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountWhatsAppConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WhatsAppRegistrationConversationWhereInput
+}
+
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2580,6 +2794,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   followUps?: boolean | Prisma.Event$followUpsArgs<ExtArgs>
   invitations?: boolean | Prisma.Event$invitationsArgs<ExtArgs>
   journeyEntries?: boolean | Prisma.Event$journeyEntriesArgs<ExtArgs>
+  whatsAppConversations?: boolean | Prisma.Event$whatsAppConversationsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -2666,6 +2881,7 @@ export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   followUps?: boolean | Prisma.Event$followUpsArgs<ExtArgs>
   invitations?: boolean | Prisma.Event$invitationsArgs<ExtArgs>
   journeyEntries?: boolean | Prisma.Event$journeyEntriesArgs<ExtArgs>
+  whatsAppConversations?: boolean | Prisma.Event$whatsAppConversationsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2688,6 +2904,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     followUps: Prisma.$FollowUpAssignmentPayload<ExtArgs>[]
     invitations: Prisma.$EventInvitationPayload<ExtArgs>[]
     journeyEntries: Prisma.$PersonJourneyPayload<ExtArgs>[]
+    whatsAppConversations: Prisma.$WhatsAppRegistrationConversationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3114,6 +3331,7 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   followUps<T extends Prisma.Event$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invitations<T extends Prisma.Event$invitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   journeyEntries<T extends Prisma.Event$journeyEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$journeyEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonJourneyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  whatsAppConversations<T extends Prisma.Event$whatsAppConversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$whatsAppConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppRegistrationConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3796,6 +4014,30 @@ export type Event$journeyEntriesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.PersonJourneyScalarFieldEnum | Prisma.PersonJourneyScalarFieldEnum[]
+}
+
+/**
+ * Event.whatsAppConversations
+ */
+export type Event$whatsAppConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WhatsAppRegistrationConversation
+   */
+  select?: Prisma.WhatsAppRegistrationConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WhatsAppRegistrationConversation
+   */
+  omit?: Prisma.WhatsAppRegistrationConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WhatsAppRegistrationConversationInclude<ExtArgs> | null
+  where?: Prisma.WhatsAppRegistrationConversationWhereInput
+  orderBy?: Prisma.WhatsAppRegistrationConversationOrderByWithRelationInput | Prisma.WhatsAppRegistrationConversationOrderByWithRelationInput[]
+  cursor?: Prisma.WhatsAppRegistrationConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WhatsAppRegistrationConversationScalarFieldEnum | Prisma.WhatsAppRegistrationConversationScalarFieldEnum[]
 }
 
 /**

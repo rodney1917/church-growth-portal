@@ -78,7 +78,8 @@ export const ModelName = {
   PersonJourney: 'PersonJourney',
   EventInvitation: 'EventInvitation',
   IntegrationEvent: 'IntegrationEvent',
-  IntegrationRegistration: 'IntegrationRegistration'
+  IntegrationRegistration: 'IntegrationRegistration',
+  WhatsAppRegistrationConversation: 'WhatsAppRegistrationConversation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -501,6 +502,25 @@ export const IntegrationRegistrationScalarFieldEnum = {
 } as const
 
 export type IntegrationRegistrationScalarFieldEnum = (typeof IntegrationRegistrationScalarFieldEnum)[keyof typeof IntegrationRegistrationScalarFieldEnum]
+
+
+export const WhatsAppRegistrationConversationScalarFieldEnum = {
+  id: 'id',
+  session: 'session',
+  chatId: 'chatId',
+  eventId: 'eventId',
+  step: 'step',
+  fullName: 'fullName',
+  area: 'area',
+  guestCount: 'guestCount',
+  transport: 'transport',
+  lastMessageId: 'lastMessageId',
+  registrationId: 'registrationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WhatsAppRegistrationConversationScalarFieldEnum = (typeof WhatsAppRegistrationConversationScalarFieldEnum)[keyof typeof WhatsAppRegistrationConversationScalarFieldEnum]
 
 
 export const SortOrder = {

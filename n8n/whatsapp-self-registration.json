@@ -1,0 +1,32 @@
+{
+  "name": "Church Growth - WhatsApp Self Registration",
+  "nodes": [
+    {
+      "parameters": {"httpMethod":"POST","path":"church-growth/waha-self-registration","authentication":"headerAuth","responseMode":"onReceived","options":{}},
+      "id":"b2267fa0-cc00-47a1-8de7-111111111111","name":"WAHA Incoming Message","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[220,300],"webhookId":"church-growth-waha-self-registration"
+    },
+    {
+      "parameters": {"jsCode":"const b=$input.first().json.body||{};const p=b.payload||{};const chatId=String(p.from||'');if(b.event!=='message'||p.fromMe===true||p.hasMedia===true||!/^\\d+@(c\\.us|lid)$/.test(chatId)||typeof p.body!=='string'||!p.id)return [];const text=p.body.trim();if(!text)return [];const match=text.match(/^REGISTER\\s+([A-Za-z0-9_-]+)$/i);return [{json:{session:String(b.session||'default'),chatId,messageId:String(p.id),text,eventCode:match?match[1].toUpperCase():undefined}}];"},
+      "id":"b2267fa0-cc00-47a1-8de7-222222222222","name":"Accept direct text only","type":"n8n-nodes-base.code","typeVersion":2,"position":[440,300]
+    },
+    {
+      "parameters": {"method":"POST","url":"={{ $env.PORTAL_BASE_URL + '/api/integrations/whatsapp' }}","sendHeaders":true,"headerParameters":{"parameters":[{"name":"x-api-key","value":"={{ $env.PORTAL_INTEGRATION_API_KEY }}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json) }}","options":{"timeout":20000}},
+      "id":"b2267fa0-cc00-47a1-8de7-333333333333","name":"Ask portal for next step","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[660,300]
+    },
+    {
+      "parameters": {"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":2},"combinator":"and","conditions":[{"id":"has-reply","leftValue":"={{ $json.reply }}","rightValue":"","operator":{"type":"string","operation":"notEmpty","singleValue":true}}]},"options":{}},
+      "id":"b2267fa0-cc00-47a1-8de7-444444444444","name":"Reply needed?","type":"n8n-nodes-base.if","typeVersion":2.2,"position":[880,300]
+    },
+    {
+      "parameters": {"method":"POST","url":"={{ $env.WAHA_BASE_URL + '/api/sendText' }}","sendHeaders":true,"headerParameters":{"parameters":[{"name":"X-Api-Key","value":"={{ $env.WAHA_API_KEY }}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify({session:$('Accept direct text only').first().json.session,chatId:$('Accept direct text only').first().json.chatId,text:$json.reply}) }}","options":{"timeout":20000}},
+      "id":"b2267fa0-cc00-47a1-8de7-555555555555","name":"Send WhatsApp reply","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1100,200]
+    }
+  ],
+  "connections": {
+    "WAHA Incoming Message":{"main":[[{"node":"Accept direct text only","type":"main","index":0}]]},
+    "Accept direct text only":{"main":[[{"node":"Ask portal for next step","type":"main","index":0}]]},
+    "Ask portal for next step":{"main":[[{"node":"Reply needed?","type":"main","index":0}]]},
+    "Reply needed?":{"main":[[{"node":"Send WhatsApp reply","type":"main","index":0}],[]]}
+  },
+  "settings":{"executionOrder":"v1"},"active":false,"pinData":{}
+}

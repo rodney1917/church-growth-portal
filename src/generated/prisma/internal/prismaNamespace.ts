@@ -424,7 +424,8 @@ export const ModelName = {
   PersonJourney: 'PersonJourney',
   EventInvitation: 'EventInvitation',
   IntegrationEvent: 'IntegrationEvent',
-  IntegrationRegistration: 'IntegrationRegistration'
+  IntegrationRegistration: 'IntegrationRegistration',
+  WhatsAppRegistrationConversation: 'WhatsAppRegistrationConversation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -440,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "event" | "person" | "eventRegistration" | "attendance" | "transportRoute" | "transportPickupPoint" | "transportVehicle" | "transportAssignment" | "transportBoarding" | "salvationDecision" | "followUpAssignment" | "followUpInteraction" | "auditLog" | "organization" | "userOrganization" | "personOrganization" | "personContact" | "possibleDuplicate" | "journeyStage" | "personJourney" | "eventInvitation" | "integrationEvent" | "integrationRegistration"
+    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "event" | "person" | "eventRegistration" | "attendance" | "transportRoute" | "transportPickupPoint" | "transportVehicle" | "transportAssignment" | "transportBoarding" | "salvationDecision" | "followUpAssignment" | "followUpInteraction" | "auditLog" | "organization" | "userOrganization" | "personOrganization" | "personContact" | "possibleDuplicate" | "journeyStage" | "personJourney" | "eventInvitation" | "integrationEvent" | "integrationRegistration" | "whatsAppRegistrationConversation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2516,6 +2517,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    WhatsAppRegistrationConversation: {
+      payload: Prisma.$WhatsAppRegistrationConversationPayload<ExtArgs>
+      fields: Prisma.WhatsAppRegistrationConversationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WhatsAppRegistrationConversationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WhatsAppRegistrationConversationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        findFirst: {
+          args: Prisma.WhatsAppRegistrationConversationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WhatsAppRegistrationConversationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        findMany: {
+          args: Prisma.WhatsAppRegistrationConversationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>[]
+        }
+        create: {
+          args: Prisma.WhatsAppRegistrationConversationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        createMany: {
+          args: Prisma.WhatsAppRegistrationConversationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WhatsAppRegistrationConversationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>[]
+        }
+        delete: {
+          args: Prisma.WhatsAppRegistrationConversationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        update: {
+          args: Prisma.WhatsAppRegistrationConversationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        deleteMany: {
+          args: Prisma.WhatsAppRegistrationConversationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WhatsAppRegistrationConversationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WhatsAppRegistrationConversationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>[]
+        }
+        upsert: {
+          args: Prisma.WhatsAppRegistrationConversationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WhatsAppRegistrationConversationPayload>
+        }
+        aggregate: {
+          args: Prisma.WhatsAppRegistrationConversationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWhatsAppRegistrationConversation>
+        }
+        groupBy: {
+          args: Prisma.WhatsAppRegistrationConversationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WhatsAppRegistrationConversationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WhatsAppRegistrationConversationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WhatsAppRegistrationConversationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2959,6 +3034,25 @@ export const IntegrationRegistrationScalarFieldEnum = {
 } as const
 
 export type IntegrationRegistrationScalarFieldEnum = (typeof IntegrationRegistrationScalarFieldEnum)[keyof typeof IntegrationRegistrationScalarFieldEnum]
+
+
+export const WhatsAppRegistrationConversationScalarFieldEnum = {
+  id: 'id',
+  session: 'session',
+  chatId: 'chatId',
+  eventId: 'eventId',
+  step: 'step',
+  fullName: 'fullName',
+  area: 'area',
+  guestCount: 'guestCount',
+  transport: 'transport',
+  lastMessageId: 'lastMessageId',
+  registrationId: 'registrationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WhatsAppRegistrationConversationScalarFieldEnum = (typeof WhatsAppRegistrationConversationScalarFieldEnum)[keyof typeof WhatsAppRegistrationConversationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3508,6 +3602,7 @@ export type GlobalOmitConfig = {
   eventInvitation?: Prisma.EventInvitationOmit
   integrationEvent?: Prisma.IntegrationEventOmit
   integrationRegistration?: Prisma.IntegrationRegistrationOmit
+  whatsAppRegistrationConversation?: Prisma.WhatsAppRegistrationConversationOmit
 }
 
 /* Types for Logging */

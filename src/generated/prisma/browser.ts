@@ -157,3 +157,8 @@ export type IntegrationEvent = Prisma.IntegrationEventModel
  *
  */
 export type IntegrationRegistration = Prisma.IntegrationRegistrationModel
+/**
+ * Model WhatsAppRegistrationConversation
+ *
+ */
+export type WhatsAppRegistrationConversation = Prisma.WhatsAppRegistrationConversationModel
