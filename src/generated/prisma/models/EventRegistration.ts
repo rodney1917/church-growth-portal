@@ -325,6 +325,7 @@ export type EventRegistrationWhereInput = {
   salvationDecision?: Prisma.XOR<Prisma.SalvationDecisionNullableScalarRelationFilter, Prisma.SalvationDecisionWhereInput> | null
   followUps?: Prisma.FollowUpAssignmentListRelationFilter
   invitation?: Prisma.XOR<Prisma.EventInvitationNullableScalarRelationFilter, Prisma.EventInvitationWhereInput> | null
+  integrationRegistrations?: Prisma.IntegrationRegistrationListRelationFilter
 }
 
 export type EventRegistrationOrderByWithRelationInput = {
@@ -354,6 +355,7 @@ export type EventRegistrationOrderByWithRelationInput = {
   salvationDecision?: Prisma.SalvationDecisionOrderByWithRelationInput
   followUps?: Prisma.FollowUpAssignmentOrderByRelationAggregateInput
   invitation?: Prisma.EventInvitationOrderByWithRelationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationOrderByRelationAggregateInput
 }
 
 export type EventRegistrationWhereUniqueInput = Prisma.AtLeast<{
@@ -387,6 +389,7 @@ export type EventRegistrationWhereUniqueInput = Prisma.AtLeast<{
   salvationDecision?: Prisma.XOR<Prisma.SalvationDecisionNullableScalarRelationFilter, Prisma.SalvationDecisionWhereInput> | null
   followUps?: Prisma.FollowUpAssignmentListRelationFilter
   invitation?: Prisma.XOR<Prisma.EventInvitationNullableScalarRelationFilter, Prisma.EventInvitationWhereInput> | null
+  integrationRegistrations?: Prisma.IntegrationRegistrationListRelationFilter
 }, "id" | "registrationNumber" | "qrTokenHash" | "eventId_personId">
 
 export type EventRegistrationOrderByWithAggregationInput = {
@@ -461,6 +464,7 @@ export type EventRegistrationCreateInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateInput = {
@@ -487,6 +491,7 @@ export type EventRegistrationUncheckedCreateInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUpdateInput = {
@@ -513,6 +518,7 @@ export type EventRegistrationUpdateInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateInput = {
@@ -539,6 +545,7 @@ export type EventRegistrationUncheckedUpdateInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateManyInput = {
@@ -913,6 +920,20 @@ export type EventRegistrationUpdateOneWithoutInvitationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventRegistrationUpdateToOneWithWhereWithoutInvitationInput, Prisma.EventRegistrationUpdateWithoutInvitationInput>, Prisma.EventRegistrationUncheckedUpdateWithoutInvitationInput>
 }
 
+export type EventRegistrationCreateNestedOneWithoutIntegrationRegistrationsInput = {
+  create?: Prisma.XOR<Prisma.EventRegistrationCreateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedCreateWithoutIntegrationRegistrationsInput>
+  connectOrCreate?: Prisma.EventRegistrationCreateOrConnectWithoutIntegrationRegistrationsInput
+  connect?: Prisma.EventRegistrationWhereUniqueInput
+}
+
+export type EventRegistrationUpdateOneRequiredWithoutIntegrationRegistrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventRegistrationCreateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedCreateWithoutIntegrationRegistrationsInput>
+  connectOrCreate?: Prisma.EventRegistrationCreateOrConnectWithoutIntegrationRegistrationsInput
+  upsert?: Prisma.EventRegistrationUpsertWithoutIntegrationRegistrationsInput
+  connect?: Prisma.EventRegistrationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventRegistrationUpdateToOneWithWhereWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUpdateWithoutIntegrationRegistrationsInput>, Prisma.EventRegistrationUncheckedUpdateWithoutIntegrationRegistrationsInput>
+}
+
 export type EventRegistrationCreateWithoutRegisteredByInput = {
   id?: string
   registrationNumber: string
@@ -936,6 +957,7 @@ export type EventRegistrationCreateWithoutRegisteredByInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutRegisteredByInput = {
@@ -961,6 +983,7 @@ export type EventRegistrationUncheckedCreateWithoutRegisteredByInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutRegisteredByInput = {
@@ -1035,6 +1058,7 @@ export type EventRegistrationCreateWithoutEventInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutEventInput = {
@@ -1060,6 +1084,7 @@ export type EventRegistrationUncheckedCreateWithoutEventInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutEventInput = {
@@ -1111,6 +1136,7 @@ export type EventRegistrationCreateWithoutPersonInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutPersonInput = {
@@ -1136,6 +1162,7 @@ export type EventRegistrationUncheckedCreateWithoutPersonInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutPersonInput = {
@@ -1187,6 +1214,7 @@ export type EventRegistrationCreateWithoutAttendanceInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutAttendanceInput = {
@@ -1212,6 +1240,7 @@ export type EventRegistrationUncheckedCreateWithoutAttendanceInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutAttendanceInput = {
@@ -1253,6 +1282,7 @@ export type EventRegistrationUpdateWithoutAttendanceInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutAttendanceInput = {
@@ -1278,6 +1308,7 @@ export type EventRegistrationUncheckedUpdateWithoutAttendanceInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateWithoutTransportAssignmentInput = {
@@ -1303,6 +1334,7 @@ export type EventRegistrationCreateWithoutTransportAssignmentInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutTransportAssignmentInput = {
@@ -1328,6 +1360,7 @@ export type EventRegistrationUncheckedCreateWithoutTransportAssignmentInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutTransportAssignmentInput = {
@@ -1369,6 +1402,7 @@ export type EventRegistrationUpdateWithoutTransportAssignmentInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutTransportAssignmentInput = {
@@ -1394,6 +1428,7 @@ export type EventRegistrationUncheckedUpdateWithoutTransportAssignmentInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateWithoutBoardingsInput = {
@@ -1419,6 +1454,7 @@ export type EventRegistrationCreateWithoutBoardingsInput = {
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutBoardingsInput = {
@@ -1444,6 +1480,7 @@ export type EventRegistrationUncheckedCreateWithoutBoardingsInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutBoardingsInput = {
@@ -1485,6 +1522,7 @@ export type EventRegistrationUpdateWithoutBoardingsInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutBoardingsInput = {
@@ -1510,6 +1548,7 @@ export type EventRegistrationUncheckedUpdateWithoutBoardingsInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateWithoutSalvationDecisionInput = {
@@ -1535,6 +1574,7 @@ export type EventRegistrationCreateWithoutSalvationDecisionInput = {
   boardings?: Prisma.TransportBoardingCreateNestedManyWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutSalvationDecisionInput = {
@@ -1560,6 +1600,7 @@ export type EventRegistrationUncheckedCreateWithoutSalvationDecisionInput = {
   boardings?: Prisma.TransportBoardingUncheckedCreateNestedManyWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutSalvationDecisionInput = {
@@ -1601,6 +1642,7 @@ export type EventRegistrationUpdateWithoutSalvationDecisionInput = {
   boardings?: Prisma.TransportBoardingUpdateManyWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutSalvationDecisionInput = {
@@ -1626,6 +1668,7 @@ export type EventRegistrationUncheckedUpdateWithoutSalvationDecisionInput = {
   boardings?: Prisma.TransportBoardingUncheckedUpdateManyWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateWithoutFollowUpsInput = {
@@ -1651,6 +1694,7 @@ export type EventRegistrationCreateWithoutFollowUpsInput = {
   boardings?: Prisma.TransportBoardingCreateNestedManyWithoutRegistrationInput
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutFollowUpsInput = {
@@ -1676,6 +1720,7 @@ export type EventRegistrationUncheckedCreateWithoutFollowUpsInput = {
   boardings?: Prisma.TransportBoardingUncheckedCreateNestedManyWithoutRegistrationInput
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutFollowUpsInput = {
@@ -1717,6 +1762,7 @@ export type EventRegistrationUpdateWithoutFollowUpsInput = {
   boardings?: Prisma.TransportBoardingUpdateManyWithoutRegistrationNestedInput
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutFollowUpsInput = {
@@ -1742,6 +1788,7 @@ export type EventRegistrationUncheckedUpdateWithoutFollowUpsInput = {
   boardings?: Prisma.TransportBoardingUncheckedUpdateManyWithoutRegistrationNestedInput
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateWithoutInvitationInput = {
@@ -1767,6 +1814,7 @@ export type EventRegistrationCreateWithoutInvitationInput = {
   boardings?: Prisma.TransportBoardingCreateNestedManyWithoutRegistrationInput
   salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationUncheckedCreateWithoutInvitationInput = {
@@ -1792,6 +1840,7 @@ export type EventRegistrationUncheckedCreateWithoutInvitationInput = {
   boardings?: Prisma.TransportBoardingUncheckedCreateNestedManyWithoutRegistrationInput
   salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
   followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedCreateNestedManyWithoutRegistrationInput
 }
 
 export type EventRegistrationCreateOrConnectWithoutInvitationInput = {
@@ -1833,6 +1882,7 @@ export type EventRegistrationUpdateWithoutInvitationInput = {
   boardings?: Prisma.TransportBoardingUpdateManyWithoutRegistrationNestedInput
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutInvitationInput = {
@@ -1858,6 +1908,127 @@ export type EventRegistrationUncheckedUpdateWithoutInvitationInput = {
   boardings?: Prisma.TransportBoardingUncheckedUpdateManyWithoutRegistrationNestedInput
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
+}
+
+export type EventRegistrationCreateWithoutIntegrationRegistrationsInput = {
+  id?: string
+  registrationNumber: string
+  qrTokenHash: string
+  source: $Enums.RegistrationSource
+  sourceDetail?: string | null
+  guestCount?: number
+  partySize?: number
+  firstTimer?: boolean
+  transportRequired?: boolean
+  returnTransportRequired?: boolean
+  consentUpdates?: boolean
+  registeredAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  event: Prisma.EventCreateNestedOneWithoutRegistrationsInput
+  person: Prisma.PersonCreateNestedOneWithoutRegistrationsInput
+  registeredBy?: Prisma.UserCreateNestedOneWithoutRegistrationsInput
+  attendance?: Prisma.AttendanceCreateNestedOneWithoutRegistrationInput
+  transportAssignment?: Prisma.TransportAssignmentCreateNestedOneWithoutRegistrationInput
+  boardings?: Prisma.TransportBoardingCreateNestedManyWithoutRegistrationInput
+  salvationDecision?: Prisma.SalvationDecisionCreateNestedOneWithoutRegistrationInput
+  followUps?: Prisma.FollowUpAssignmentCreateNestedManyWithoutRegistrationInput
+  invitation?: Prisma.EventInvitationCreateNestedOneWithoutRegistrationInput
+}
+
+export type EventRegistrationUncheckedCreateWithoutIntegrationRegistrationsInput = {
+  id?: string
+  eventId: string
+  personId: string
+  registrationNumber: string
+  qrTokenHash: string
+  source: $Enums.RegistrationSource
+  sourceDetail?: string | null
+  guestCount?: number
+  partySize?: number
+  firstTimer?: boolean
+  transportRequired?: boolean
+  returnTransportRequired?: boolean
+  consentUpdates?: boolean
+  registeredById?: string | null
+  registeredAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  attendance?: Prisma.AttendanceUncheckedCreateNestedOneWithoutRegistrationInput
+  transportAssignment?: Prisma.TransportAssignmentUncheckedCreateNestedOneWithoutRegistrationInput
+  boardings?: Prisma.TransportBoardingUncheckedCreateNestedManyWithoutRegistrationInput
+  salvationDecision?: Prisma.SalvationDecisionUncheckedCreateNestedOneWithoutRegistrationInput
+  followUps?: Prisma.FollowUpAssignmentUncheckedCreateNestedManyWithoutRegistrationInput
+  invitation?: Prisma.EventInvitationUncheckedCreateNestedOneWithoutRegistrationInput
+}
+
+export type EventRegistrationCreateOrConnectWithoutIntegrationRegistrationsInput = {
+  where: Prisma.EventRegistrationWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventRegistrationCreateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedCreateWithoutIntegrationRegistrationsInput>
+}
+
+export type EventRegistrationUpsertWithoutIntegrationRegistrationsInput = {
+  update: Prisma.XOR<Prisma.EventRegistrationUpdateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedUpdateWithoutIntegrationRegistrationsInput>
+  create: Prisma.XOR<Prisma.EventRegistrationCreateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedCreateWithoutIntegrationRegistrationsInput>
+  where?: Prisma.EventRegistrationWhereInput
+}
+
+export type EventRegistrationUpdateToOneWithWhereWithoutIntegrationRegistrationsInput = {
+  where?: Prisma.EventRegistrationWhereInput
+  data: Prisma.XOR<Prisma.EventRegistrationUpdateWithoutIntegrationRegistrationsInput, Prisma.EventRegistrationUncheckedUpdateWithoutIntegrationRegistrationsInput>
+}
+
+export type EventRegistrationUpdateWithoutIntegrationRegistrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  qrTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumRegistrationSourceFieldUpdateOperationsInput | $Enums.RegistrationSource
+  sourceDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  guestCount?: Prisma.IntFieldUpdateOperationsInput | number
+  partySize?: Prisma.IntFieldUpdateOperationsInput | number
+  firstTimer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  transportRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  returnTransportRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  registeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  event?: Prisma.EventUpdateOneRequiredWithoutRegistrationsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutRegistrationsNestedInput
+  registeredBy?: Prisma.UserUpdateOneWithoutRegistrationsNestedInput
+  attendance?: Prisma.AttendanceUpdateOneWithoutRegistrationNestedInput
+  transportAssignment?: Prisma.TransportAssignmentUpdateOneWithoutRegistrationNestedInput
+  boardings?: Prisma.TransportBoardingUpdateManyWithoutRegistrationNestedInput
+  salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
+  followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
+  invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+}
+
+export type EventRegistrationUncheckedUpdateWithoutIntegrationRegistrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  personId?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  qrTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumRegistrationSourceFieldUpdateOperationsInput | $Enums.RegistrationSource
+  sourceDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  guestCount?: Prisma.IntFieldUpdateOperationsInput | number
+  partySize?: Prisma.IntFieldUpdateOperationsInput | number
+  firstTimer?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  transportRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  returnTransportRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  registeredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendance?: Prisma.AttendanceUncheckedUpdateOneWithoutRegistrationNestedInput
+  transportAssignment?: Prisma.TransportAssignmentUncheckedUpdateOneWithoutRegistrationNestedInput
+  boardings?: Prisma.TransportBoardingUncheckedUpdateManyWithoutRegistrationNestedInput
+  salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
+  followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
+  invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationCreateManyRegisteredByInput = {
@@ -1902,6 +2073,7 @@ export type EventRegistrationUpdateWithoutRegisteredByInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutRegisteredByInput = {
@@ -1927,6 +2099,7 @@ export type EventRegistrationUncheckedUpdateWithoutRegisteredByInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateManyWithoutRegisteredByInput = {
@@ -1990,6 +2163,7 @@ export type EventRegistrationUpdateWithoutEventInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutEventInput = {
@@ -2015,6 +2189,7 @@ export type EventRegistrationUncheckedUpdateWithoutEventInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateManyWithoutEventInput = {
@@ -2078,6 +2253,7 @@ export type EventRegistrationUpdateWithoutPersonInput = {
   salvationDecision?: Prisma.SalvationDecisionUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateWithoutPersonInput = {
@@ -2103,6 +2279,7 @@ export type EventRegistrationUncheckedUpdateWithoutPersonInput = {
   salvationDecision?: Prisma.SalvationDecisionUncheckedUpdateOneWithoutRegistrationNestedInput
   followUps?: Prisma.FollowUpAssignmentUncheckedUpdateManyWithoutRegistrationNestedInput
   invitation?: Prisma.EventInvitationUncheckedUpdateOneWithoutRegistrationNestedInput
+  integrationRegistrations?: Prisma.IntegrationRegistrationUncheckedUpdateManyWithoutRegistrationNestedInput
 }
 
 export type EventRegistrationUncheckedUpdateManyWithoutPersonInput = {
@@ -2132,11 +2309,13 @@ export type EventRegistrationUncheckedUpdateManyWithoutPersonInput = {
 export type EventRegistrationCountOutputType = {
   boardings: number
   followUps: number
+  integrationRegistrations: number
 }
 
 export type EventRegistrationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   boardings?: boolean | EventRegistrationCountOutputTypeCountBoardingsArgs
   followUps?: boolean | EventRegistrationCountOutputTypeCountFollowUpsArgs
+  integrationRegistrations?: boolean | EventRegistrationCountOutputTypeCountIntegrationRegistrationsArgs
 }
 
 /**
@@ -2161,6 +2340,13 @@ export type EventRegistrationCountOutputTypeCountBoardingsArgs<ExtArgs extends r
  */
 export type EventRegistrationCountOutputTypeCountFollowUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FollowUpAssignmentWhereInput
+}
+
+/**
+ * EventRegistrationCountOutputType without action
+ */
+export type EventRegistrationCountOutputTypeCountIntegrationRegistrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationRegistrationWhereInput
 }
 
 
@@ -2191,6 +2377,7 @@ export type EventRegistrationSelect<ExtArgs extends runtime.Types.Extensions.Int
   salvationDecision?: boolean | Prisma.EventRegistration$salvationDecisionArgs<ExtArgs>
   followUps?: boolean | Prisma.EventRegistration$followUpsArgs<ExtArgs>
   invitation?: boolean | Prisma.EventRegistration$invitationArgs<ExtArgs>
+  integrationRegistrations?: boolean | Prisma.EventRegistration$integrationRegistrationsArgs<ExtArgs>
   _count?: boolean | Prisma.EventRegistrationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventRegistration"]>
 
@@ -2271,6 +2458,7 @@ export type EventRegistrationInclude<ExtArgs extends runtime.Types.Extensions.In
   salvationDecision?: boolean | Prisma.EventRegistration$salvationDecisionArgs<ExtArgs>
   followUps?: boolean | Prisma.EventRegistration$followUpsArgs<ExtArgs>
   invitation?: boolean | Prisma.EventRegistration$invitationArgs<ExtArgs>
+  integrationRegistrations?: boolean | Prisma.EventRegistration$integrationRegistrationsArgs<ExtArgs>
   _count?: boolean | Prisma.EventRegistrationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventRegistrationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2296,6 +2484,7 @@ export type $EventRegistrationPayload<ExtArgs extends runtime.Types.Extensions.I
     salvationDecision: Prisma.$SalvationDecisionPayload<ExtArgs> | null
     followUps: Prisma.$FollowUpAssignmentPayload<ExtArgs>[]
     invitation: Prisma.$EventInvitationPayload<ExtArgs> | null
+    integrationRegistrations: Prisma.$IntegrationRegistrationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2718,6 +2907,7 @@ export interface Prisma__EventRegistrationClient<T, Null = never, ExtArgs extend
   salvationDecision<T extends Prisma.EventRegistration$salvationDecisionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventRegistration$salvationDecisionArgs<ExtArgs>>): Prisma.Prisma__SalvationDecisionClient<runtime.Types.Result.GetResult<Prisma.$SalvationDecisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   followUps<T extends Prisma.EventRegistration$followUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventRegistration$followUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invitation<T extends Prisma.EventRegistration$invitationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventRegistration$invitationArgs<ExtArgs>>): Prisma.Prisma__EventInvitationClient<runtime.Types.Result.GetResult<Prisma.$EventInvitationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  integrationRegistrations<T extends Prisma.EventRegistration$integrationRegistrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventRegistration$integrationRegistrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationRegistrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3305,6 +3495,30 @@ export type EventRegistration$invitationArgs<ExtArgs extends runtime.Types.Exten
    */
   include?: Prisma.EventInvitationInclude<ExtArgs> | null
   where?: Prisma.EventInvitationWhereInput
+}
+
+/**
+ * EventRegistration.integrationRegistrations
+ */
+export type EventRegistration$integrationRegistrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationRegistration
+   */
+  select?: Prisma.IntegrationRegistrationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationRegistration
+   */
+  omit?: Prisma.IntegrationRegistrationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationRegistrationInclude<ExtArgs> | null
+  where?: Prisma.IntegrationRegistrationWhereInput
+  orderBy?: Prisma.IntegrationRegistrationOrderByWithRelationInput | Prisma.IntegrationRegistrationOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationRegistrationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationRegistrationScalarFieldEnum | Prisma.IntegrationRegistrationScalarFieldEnum[]
 }
 
 /**

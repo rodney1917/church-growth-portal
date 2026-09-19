@@ -1,0 +1,87 @@
+{
+  "name": "Church Growth - Confirmed Registration to Portal",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "church-growth/confirmed-registration",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1267fa0-cc00-47a1-8de7-111111111111",
+      "name": "Confirmed registration webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "church-growth-confirmed-registration"
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $input.first().json.body || {}; const source = String(b.source || '').toUpperCase(); const valid = b.confirmed === true && ['WHATSAPP','SMS','OTHER'].includes(source) && typeof b.fullName === 'string' && b.fullName.trim().length >= 2 && typeof b.externalId === 'string' && b.externalId.trim().length > 0 && typeof b.eventCode === 'string' && b.eventCode.trim().length > 0; return [{json: {valid, payload: valid ? {provider:'N8N', externalId:b.externalId.trim(), eventCode:b.eventCode.trim(), confirmed:true, fullName:b.fullName.trim(), phone:String(b.phone || '').trim(), area:String(b.area || '').trim(), source, consentUpdates:b.consentUpdates === true} : null}}];"
+      },
+      "id": "a1267fa0-cc00-47a1-8de7-222222222222",
+      "name": "Validate explicit confirmation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2},
+          "combinator": "and",
+          "conditions": [{"id": "confirmed", "leftValue": "={{ $json.valid }}", "rightValue": true, "operator": {"type": "boolean", "operation": "true", "singleValue": true}}]
+        },
+        "options": {}
+      },
+      "id": "a1267fa0-cc00-47a1-8de7-333333333333",
+      "name": "Confirmed and valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.PORTAL_BASE_URL + '/api/integrations/registration' }}",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [{"name": "x-api-key", "value": "={{ $env.PORTAL_INTEGRATION_API_KEY }}"}]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.payload) }}",
+        "options": {"timeout": 20000}
+      },
+      "id": "a1267fa0-cc00-47a1-8de7-444444444444",
+      "name": "Create in portal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [870, 200]
+    },
+    {
+      "parameters": {"respondWith": "json", "responseBody": "={{ JSON.stringify($json) }}", "options": {"responseCode": 200}},
+      "id": "a1267fa0-cc00-47a1-8de7-555555555555",
+      "name": "Return registration number",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1090, 200]
+    },
+    {
+      "parameters": {"respondWith": "json", "responseBody": "{\"error\":\"Explicit confirmation, eventCode, externalId, fullName and valid source are required\"}", "options": {"responseCode": 400}},
+      "id": "a1267fa0-cc00-47a1-8de7-666666666666",
+      "name": "Reject unconfirmed input",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [870, 400]
+    }
+  ],
+  "connections": {
+    "Confirmed registration webhook": {"main": [[{"node": "Validate explicit confirmation", "type": "main", "index": 0}]]},
+    "Validate explicit confirmation": {"main": [[{"node": "Confirmed and valid?", "type": "main", "index": 0}]]},
+    "Confirmed and valid?": {"main": [[{"node": "Create in portal", "type": "main", "index": 0}], [{"node": "Reject unconfirmed input", "type": "main", "index": 0}]]},
+    "Create in portal": {"main": [[{"node": "Return registration number", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "active": false,
+  "pinData": {}
+}

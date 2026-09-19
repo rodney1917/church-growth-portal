@@ -304,6 +304,7 @@ model EventRegistration {
   salvationDecision       SalvationDecision?
   followUps               FollowUpAssignment[]
   invitation              EventInvitation?
+  integrationRegistrations IntegrationRegistration[]
 
   @@unique([eventId, personId])
   @@index([eventId, registeredAt])
@@ -637,4 +638,16 @@ model IntegrationEvent {
   processedAt DateTime?
 
   @@index([provider, status, createdAt])
+}
+
+model IntegrationRegistration {
+  id                 String            @id @default(uuid()) @db.Uuid
+  provider           String
+  externalId         String
+  registrationId     String            @db.Uuid
+  createdAt          DateTime          @default(now())
+  registration       EventRegistration @relation(fields: [registrationId], references: [id])
+
+  @@unique([provider, externalId])
+  @@index([registrationId])
 }

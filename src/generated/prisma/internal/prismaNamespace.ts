@@ -423,7 +423,8 @@ export const ModelName = {
   JourneyStage: 'JourneyStage',
   PersonJourney: 'PersonJourney',
   EventInvitation: 'EventInvitation',
-  IntegrationEvent: 'IntegrationEvent'
+  IntegrationEvent: 'IntegrationEvent',
+  IntegrationRegistration: 'IntegrationRegistration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -439,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "event" | "person" | "eventRegistration" | "attendance" | "transportRoute" | "transportPickupPoint" | "transportVehicle" | "transportAssignment" | "transportBoarding" | "salvationDecision" | "followUpAssignment" | "followUpInteraction" | "auditLog" | "organization" | "userOrganization" | "personOrganization" | "personContact" | "possibleDuplicate" | "journeyStage" | "personJourney" | "eventInvitation" | "integrationEvent"
+    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "event" | "person" | "eventRegistration" | "attendance" | "transportRoute" | "transportPickupPoint" | "transportVehicle" | "transportAssignment" | "transportBoarding" | "salvationDecision" | "followUpAssignment" | "followUpInteraction" | "auditLog" | "organization" | "userOrganization" | "personOrganization" | "personContact" | "possibleDuplicate" | "journeyStage" | "personJourney" | "eventInvitation" | "integrationEvent" | "integrationRegistration"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2441,6 +2442,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    IntegrationRegistration: {
+      payload: Prisma.$IntegrationRegistrationPayload<ExtArgs>
+      fields: Prisma.IntegrationRegistrationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IntegrationRegistrationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IntegrationRegistrationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        findFirst: {
+          args: Prisma.IntegrationRegistrationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IntegrationRegistrationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        findMany: {
+          args: Prisma.IntegrationRegistrationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>[]
+        }
+        create: {
+          args: Prisma.IntegrationRegistrationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        createMany: {
+          args: Prisma.IntegrationRegistrationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IntegrationRegistrationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>[]
+        }
+        delete: {
+          args: Prisma.IntegrationRegistrationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        update: {
+          args: Prisma.IntegrationRegistrationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        deleteMany: {
+          args: Prisma.IntegrationRegistrationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IntegrationRegistrationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IntegrationRegistrationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>[]
+        }
+        upsert: {
+          args: Prisma.IntegrationRegistrationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationRegistrationPayload>
+        }
+        aggregate: {
+          args: Prisma.IntegrationRegistrationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIntegrationRegistration>
+        }
+        groupBy: {
+          args: Prisma.IntegrationRegistrationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationRegistrationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IntegrationRegistrationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationRegistrationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2873,6 +2948,17 @@ export const IntegrationEventScalarFieldEnum = {
 } as const
 
 export type IntegrationEventScalarFieldEnum = (typeof IntegrationEventScalarFieldEnum)[keyof typeof IntegrationEventScalarFieldEnum]
+
+
+export const IntegrationRegistrationScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  externalId: 'externalId',
+  registrationId: 'registrationId',
+  createdAt: 'createdAt'
+} as const
+
+export type IntegrationRegistrationScalarFieldEnum = (typeof IntegrationRegistrationScalarFieldEnum)[keyof typeof IntegrationRegistrationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3421,6 +3507,7 @@ export type GlobalOmitConfig = {
   personJourney?: Prisma.PersonJourneyOmit
   eventInvitation?: Prisma.EventInvitationOmit
   integrationEvent?: Prisma.IntegrationEventOmit
+  integrationRegistration?: Prisma.IntegrationRegistrationOmit
 }
 
 /* Types for Logging */

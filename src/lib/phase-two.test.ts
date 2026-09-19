@@ -1,4 +1,5 @@
 import{describe,expect,it}from"vitest";import{canAllocate,canTransitionInvitation,duplicateCheckIn,exactPersonMatch,possibleSharedPhoneMatches,registrationTotal,safePersonContact,scopeAllows}from"./domain-rules";import{formatRegistrationNumber,hashToken,makeQrToken,normalizePhone}from"./security";import{invitationSchema,quickSoulSchema,registrationSchema}from"./validation";
+import { integrationRegistrationSchema } from "./integration-registration";
 const eventId="11111111-1111-4111-8111-111111111111";const people=[{id:"a",fullName:"John Banda",normalizedPhone:"260971234567",area:"Kafue"},{id:"b",fullName:"Mary Banda",normalizedPhone:"260971234567",area:"Kafue"}];
 describe("Phase 2 launch rules",()=>{
  it("1 registers an own-phone person input",()=>expect(registrationSchema.safeParse({eventId,fullName:"John Banda",phone:"0971234567",source:"SELF_WEB"}).success).toBe(true));
@@ -33,4 +34,10 @@ describe("Phase 2 launch rules",()=>{
  it("29 rejects invalid public registration",()=>expect(registrationSchema.safeParse({eventId,fullName:"A",phone:"1",source:"SELF_WEB"}).success).toBe(false));
  it("30 produces audit-safe metadata without secrets",()=>expect({action:"REGISTERED",entityId:"id"}).not.toHaveProperty("token"));
  it("normalizes shared phone consistently",()=>expect(normalizePhone("+260 971 234 567")).toBe(normalizePhone("0971234567")));
+ it("requires explicit integration confirmation",()=>{
+  const input={provider:"N8N",externalId:"waha-message-123",eventCode:"NOT1000",fullName:"Jane Banda",source:"WHATSAPP"};
+  expect(integrationRegistrationSchema.safeParse(input).success).toBe(false);
+  expect(integrationRegistrationSchema.safeParse({...input,confirmed:true}).success).toBe(true);
+  expect(integrationRegistrationSchema.safeParse({...input,confirmed:true,phone:""}).success).toBe(true);
+ });
 });

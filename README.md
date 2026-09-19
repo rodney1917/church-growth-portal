@@ -30,11 +30,20 @@ QR codes contain random tokens only. Passwords use bcrypt, sessions are signed H
 ## Integration API
 
 - `GET /api/integrations/registration?q=...` searches registration status.
+- `POST /api/integrations/registration` creates a confirmed registration from n8n/WAHA/SMS with `x-api-key`. Requires `provider`, unique `externalId`, `eventCode`, `confirmed: true`, `fullName`, and `source` (`WHATSAPP`, `SMS`, or `OTHER`). `phone`, `area`, and `consentUpdates` are optional. Returns `registrationNumber` and `personId`; repeated provider/externalId returns the same number. A name alone is never registered. The optional phone is not a unique person identifier.
 - `POST /api/integrations/sms` accepts authenticated inbound `NIGHT`, `YES`, and `NO` commands for asynchronous processing.
 - `PATCH /api/integrations/invitations/{token}` records queued, sent, delivered, or failed delivery state.
 - `GET /api/reports/export?eventId=...&type=...` exports authorized CSV reports.
 
 All integration calls use `x-api-key`. PostgreSQL remains authoritative; WAHA, SMS gateways, and n8n only transport messages and commands.
+
+### n8n confirmed-registration workflow
+
+Import `n8n/confirmed-registration.json` into n8n. Configure the webhook's **Header Auth** credential with a private inbound key shared only with your trusted WAHA/SMS bridge. Set n8n environment variables `PORTAL_BASE_URL=https://notc.startrackzm.com` and `PORTAL_INTEGRATION_API_KEY` to the portal's `INTEGRATION_API_KEY`; keep both keys out of workflow JSON and execution logs. If your n8n instance disallows `$env` expressions, replace the HTTP node's header with an n8n Header Auth credential and set the portal URL in that node. Do not activate until both credentials and URL are configured.
+
+Send JSON to the n8n webhook after the invitee explicitly confirms, for example `{"externalId":"provider-message-id","eventCode":"NOT1000","confirmed":true,"fullName":"Jane Banda","phone":"0971234567","area":"Kafue","source":"WHATSAPP","consentUpdates":false}`. Use a stable provider message/conversation ID for retries. For future events, send that event's own code. n8n returns the human-readable registration number; use it in a separate authorized WAHA/SMS confirmation step. Do not set `confirmed: true` merely because another person supplied an invitee's name. Opt-outs and unsolicited names must not use this endpoint. The workflow is deliberately inactive on import.
+
+Migration `0003_integration_registration` adds a small idempotency table and must be applied with `pnpm prisma migrate deploy` before activating the workflow. It does not change existing registrations.
 
 ## Required environment
 

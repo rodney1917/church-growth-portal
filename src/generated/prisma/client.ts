@@ -176,3 +176,8 @@ export type EventInvitation = Prisma.EventInvitationModel
  * 
  */
 export type IntegrationEvent = Prisma.IntegrationEventModel
+/**
+ * Model IntegrationRegistration
+ *
+ */
+export type IntegrationRegistration = Prisma.IntegrationRegistrationModel

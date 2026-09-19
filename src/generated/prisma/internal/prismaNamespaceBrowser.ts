@@ -77,7 +77,8 @@ export const ModelName = {
   JourneyStage: 'JourneyStage',
   PersonJourney: 'PersonJourney',
   EventInvitation: 'EventInvitation',
-  IntegrationEvent: 'IntegrationEvent'
+  IntegrationEvent: 'IntegrationEvent',
+  IntegrationRegistration: 'IntegrationRegistration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -489,6 +490,17 @@ export const IntegrationEventScalarFieldEnum = {
 } as const
 
 export type IntegrationEventScalarFieldEnum = (typeof IntegrationEventScalarFieldEnum)[keyof typeof IntegrationEventScalarFieldEnum]
+
+
+export const IntegrationRegistrationScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  externalId: 'externalId',
+  registrationId: 'registrationId',
+  createdAt: 'createdAt'
+} as const
+
+export type IntegrationRegistrationScalarFieldEnum = (typeof IntegrationRegistrationScalarFieldEnum)[keyof typeof IntegrationRegistrationScalarFieldEnum]
 
 
 export const SortOrder = {
