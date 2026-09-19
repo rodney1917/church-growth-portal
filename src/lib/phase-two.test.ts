@@ -2,6 +2,7 @@ import{describe,expect,it}from"vitest";import{canAllocate,canTransitionInvitatio
 const eventId="11111111-1111-4111-8111-111111111111";const people=[{id:"a",fullName:"John Banda",normalizedPhone:"260971234567",area:"Kafue"},{id:"b",fullName:"Mary Banda",normalizedPhone:"260971234567",area:"Kafue"}];
 describe("Phase 2 launch rules",()=>{
  it("1 registers an own-phone person input",()=>expect(registrationSchema.safeParse({eventId,fullName:"John Banda",phone:"0971234567",source:"SELF_WEB"}).success).toBe(true));
+ it("accepts an empty optional source detail from the registration form",()=>expect(registrationSchema.safeParse({eventId,fullName:"John Banda",phone:"0971234567",source:"WHATSAPP",sourceDetail:""}).success).toBe(true));
  it("2 accepts no-phone registration input",()=>expect(registrationSchema.safeParse({eventId,fullName:"Child Banda",noPhone:true,source:"STAFF_CAPTURE"}).success).toBe(true));
  it("3 keeps alternate contact separate",()=>expect(safePersonContact("0971234567","MOTHER")).toEqual({personPhone:null,contactValue:"0971234567"}));
  it("4 finds two people sharing one phone",()=>expect(possibleSharedPhoneMatches(people,"260971234567")).toHaveLength(2));

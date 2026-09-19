@@ -43,9 +43,9 @@ export async function registerAction(_: ActionState, form: FormData): Promise<Ac
   if (!rateLimit(`register:${key}`)) return { ok: false, message: "Too many attempts. Please wait a minute and try again." };
 
   const parsed = registrationSchema.safeParse({
-    eventId: form.get("eventId"), fullName: form.get("fullName"), phone: form.get("phone"), noPhone: bool(form,"noPhone"), contactPerson: form.get("contactPerson"), relationship: form.get("relationship")||"SELF", area: form.get("area"),
+    eventId: form.get("eventId"), fullName: form.get("fullName"), phone: form.get("phone") || "", noPhone: bool(form,"noPhone"), contactPerson: form.get("contactPerson") || "", relationship: form.get("relationship")||"SELF", area: form.get("area") || "",
     guestCount: form.get("guestCount"), firstTimer: bool(form, "firstTimer"), transportRequired: bool(form, "transportRequired"),
-    pickupLocation: form.get("pickupLocation"), source: form.get("source"), sourceDetail: form.get("sourceDetail"), consentUpdates: bool(form, "consentUpdates"),
+    pickupLocation: form.get("pickupLocation") || "", source: form.get("source"), sourceDetail: form.get("sourceDetail") || "", consentUpdates: bool(form, "consentUpdates"),
   });
   if (!parsed.success) return { ok: false, message: parsed.error.issues[0]?.message || "Please check your details." };
   const data = parsed.data;
